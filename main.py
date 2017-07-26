@@ -49,6 +49,7 @@ def get_q(rtm,lam):
     w2 = ((lam/math.pi)*abs(b)/(math.sqrt(1 - ((a+d)/2)**2)))
     print(w2*math.pi/(1064*10**(-7)))
     q = 1/(rover1 - (lam/(math.pi*w2))*1j)
+    q = -q.real + q.imag
     return q
 
 def prop_q(q,rtm):
