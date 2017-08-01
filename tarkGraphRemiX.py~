@@ -170,29 +170,16 @@ def combine_graphs(Xs,Ds,Qs):
            
     return [newX,newY]
 
-def getRs(Qs):
-    #Convert a list of Qs to get the radius of curvature
-    
-    Rs = []
-
-    for q in Qs:
-        Rs.append((((1/q).real))**(-1))
-
-    return Rs
-
-
 optics = {
         'D':m_freeSpace,
         'L':m_lens,
         'M':m_mirror
          }
 LAM = 1064*10**(-7)
-#LAM = 1000*10**(-5)
 
 #cavity = [['eM',0],['D',60],['L',200],['D',50],['eM',0]]
 #cavity = [['eM',1],['D',.4],['D',.5],['eM',1]]
-#cavity = [['M',0],['D',40],['M',5],['D',5.2],['M',5],['D',40],['M',0]]
-cavity = [['M',200],['D',34],['M',0],['D',3],['L',18],['D',3],['M',-40],['D',61],['L',30],['D',105],['L',30],['D',41],['M',0]]
+cavity = [['M',0],['D',20],['M',-100],['D',3],['L',18],['D',3],['M',0],['D',20],['M',0]]
 
 rtm = get_RTM(unfold_Cav(cavity))
 
@@ -200,15 +187,12 @@ rtm = get_RTM(unfold_Cav(cavity))
 if(check_stab(rtm)==True):
     print('This cavity is stable')
 
-    res = 100
+    res = 50
     
     q = get_q(rtm,LAM)
     Ds = getDs(cavity)
     Xs = getXs(Ds,res)
     Qs = getQs(q,cavity)
-
-    Rs = getRs(Qs)
-    print('Rs: \n',Rs)
 
     X,Y = combine_graphs(Xs,Ds,Qs)
 
